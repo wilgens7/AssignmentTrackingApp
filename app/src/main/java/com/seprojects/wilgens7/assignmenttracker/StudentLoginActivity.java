@@ -34,12 +34,15 @@ public class StudentLoginActivity extends AppCompatActivity {
     static String json = "";
     private String username;
     private String password;
+    protected String loginResultMessage;
     private Student student;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_login);
+
+        loginResultMessage = "";
 
         studentNumber = findViewById(R.id.login_student_username_editext);
         studentPassword = findViewById(R.id.login_student_password_edittext);
@@ -53,7 +56,8 @@ public class StudentLoginActivity extends AppCompatActivity {
          password = studentPassword.getText().toString();
 
         if(username.isEmpty() || password.isEmpty()){
-            Toast.makeText(this,"Check Missing Input Value",Toast.LENGTH_LONG).show();
+            loginResultMessage = "Check Missing Input Value";
+            Toast.makeText(this,loginResultMessage,Toast.LENGTH_LONG).show();
         }
         else {
             StudentLoginBT studentLoginBT = new StudentLoginBT(this);
@@ -165,8 +169,8 @@ public class StudentLoginActivity extends AppCompatActivity {
 //            }
 //
             try{
-
-                Toast.makeText(context,result,Toast.LENGTH_LONG).show();
+                loginResultMessage = result;
+                Toast.makeText(context,loginResultMessage,Toast.LENGTH_LONG).show();
 
             }catch (NullPointerException e){
                 Toast.makeText(context,"Login error"+e.toString(),Toast.LENGTH_LONG).show();
